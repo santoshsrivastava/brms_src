@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>CVSHealthCarePoC</groupId>
+  <artifactId>CVSHealthCare</artifactId>
+  <version>1.1</version>
+  <packaging>kjar</packaging>
+  <name>CVSHealthCare</name>
+  <description>CVSHealthCare Poc</description>
+  
+  <distributionManagement>
+  <repository>
+    <id>cvsbrms</id>
+    <name>OpenShift Maven repo</name>
+    <url>http://nexus-nexus.poc.cvs.openshift.online/repository/maven-releases/</url>
+  </repository>
+
+  <snapshotRepository>
+    <id>cvsbrms</id>
+    <name>OpenShift Maven repo</name>
+    <url>http://nexus-nexus.poc.cvs.openshift.online/repository/maven-snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>CVSjar</groupId>
+      <artifactId>Health</artifactId>
+      <version>1.0</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <id>guvnor-m2-repo</id>
+      <name>Guvnor M2 Repo</name>
+      <url>http://localhost:8080/business-central/maven2/</url>
+    </repository>
+  </repositories>
+ <build>
+    <plugins>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>6.5.0.Final-redhat-2</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>   
+</project>

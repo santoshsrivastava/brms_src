@@ -1,0 +1,19 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Prescription;
+import com.cvs.model.Drug;
+import com.cvs.model.ResultBean;
+
+rule "CIIEligibility"
+	dialect "mvel"
+	ruleflow-group "prescripFlowGrp"
+	when
+		prescription : Prescription( )
+		(drug : Drug( drugSchedule != "2" ) from drug)
+		resultBean : ResultBean( )
+	then
+		modify( resultBean ) {
+				setCompoundEligibility( true )
+		}
+end

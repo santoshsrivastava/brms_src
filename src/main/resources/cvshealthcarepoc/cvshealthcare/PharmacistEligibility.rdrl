@@ -1,0 +1,21 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Pharmacy;
+import com.cvs.model.License;
+import com.cvs.model.Prescription;
+import com.cvs.model.ResultBean;
+import com.cvs.model.Pharmacist;
+
+rule "PharmacistEligibility"
+	dialect "mvel"
+	when
+		$prescription : Prescription( )
+		$pharmacy : Pharmacy( )
+		($pharmacist : Pharmacist( licenses == "1" ) from $pharmacy.rphInfo)
+		$result : ResultBean( )
+	then
+		modify( $result ) {
+				setPharmacistEligibility( true )
+		}
+end

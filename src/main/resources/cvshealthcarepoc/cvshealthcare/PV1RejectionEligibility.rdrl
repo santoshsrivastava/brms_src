@@ -1,0 +1,17 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Pharmacy;
+import com.cvs.model.ResultBean;
+
+rule "PV1RejectionEligibility"
+	dialect "mvel"
+	ruleflow-group "targtStoreRuleFlowGrp"
+	when
+		pharmacy : Pharmacy( pv1RejectCount < 10 )
+		resultBean : ResultBean( )
+	then
+		modify( resultBean ) {
+				setPv1RejectionEligibility( true )
+		}
+end

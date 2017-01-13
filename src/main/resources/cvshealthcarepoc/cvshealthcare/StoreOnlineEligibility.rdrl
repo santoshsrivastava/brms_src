@@ -1,0 +1,17 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Pharmacy;
+import com.cvs.model.ResultBean;
+
+rule "StoreOnlineEligibility"
+	dialect "mvel"
+	ruleflow-group "targtStoreRuleFlowGrp"
+	when
+		pharmacy : Pharmacy( onlineIndicator == true )
+		resultBean : ResultBean( )
+	then
+		modify( resultBean ) {
+				setStoreOnlineEligibility( true )
+		}
+end

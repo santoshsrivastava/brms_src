@@ -1,0 +1,16 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Pharmacy;
+import com.cvs.model.ResultBean;
+
+rule "StoreOpenEligibility"
+	dialect "mvel"
+	when
+		($pharmacy : Pharmacy( storeOpenTime != null , storeCloseTime != null ) from $pharmacy)
+		$result : ResultBean( )
+	then
+		modify( $result ) {
+				setStoreOpenEligibility( true )
+		}
+end

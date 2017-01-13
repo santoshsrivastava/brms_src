@@ -1,0 +1,17 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Pharmacy;
+import com.cvs.model.ResultBean;
+
+rule "WorkloadEligibility"
+	dialect "mvel"
+	ruleflow-group "targtStoreRuleFlowGrp"
+	when
+		pharmacy : Pharmacy( rphWorkItemCount < 20 , rphInfo != null )
+		resultBean : ResultBean( )
+	then
+		modify( resultBean ) {
+				setWorkloadEligibility( true )
+		}
+end

@@ -1,0 +1,17 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Prescription;
+import com.cvs.model.ResultBean;
+
+rule "CompoundEligibility"
+	dialect "mvel"
+	ruleflow-group "prescripFlowGrp"
+	when
+		prescription : Prescription( compoundIndicator == false )
+		resultBean : ResultBean( )
+	then
+		modify( resultBean ) {
+				setCompoundEligibility( true )
+		}
+end

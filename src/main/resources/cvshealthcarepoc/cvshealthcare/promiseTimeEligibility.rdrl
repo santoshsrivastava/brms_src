@@ -1,0 +1,18 @@
+package cvshealthcarepoc.cvshealthcare;
+
+import java.lang.Number;
+import com.cvs.model.Prescription;
+import com.cvs.model.PrescriptionFill;
+import com.cvs.model.ResultBean;
+
+rule "promiseTimeEligibility"
+	dialect "mvel"
+	when
+		$prescription : Prescription( )
+		($currentFill : PrescriptionFill( fillPromisedDate == "11-01-2017" , fillPromisedTime == 3 ) from $prescription.currentFill)
+		$result : ResultBean( )
+	then
+		modify( $result ) {
+				setPromiseTimeEligibility( true )
+		}
+end
